@@ -9,6 +9,7 @@ const INITIAL_FORM_STATE = {
     status: "active",
 };
 
+// @ts-ignore
 export default function CreateProjectForm({onSubmit, onCancel}) {
     const [formData, setFormData] = useState(INITIAL_FORM_STATE);
     const [errors, setErrors] = useState({});
@@ -49,6 +50,7 @@ export default function CreateProjectForm({onSubmit, onCancel}) {
         return validationErrors;
     }
 
+    // @ts-ignore
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -83,9 +85,8 @@ export default function CreateProjectForm({onSubmit, onCancel}) {
                     onChange={handleChange}
                 />
 
-                {errors.
-// @ts-ignore
-                name && <p className="field-error">{errors.name}</p>}
+                {// @ts-ignore
+                errors.name && <p className="field-error">{errors.name}</p>}
             </div>
 
             <div className="form-field">
@@ -101,9 +102,7 @@ export default function CreateProjectForm({onSubmit, onCancel}) {
                     onChange={handleChange}
                 />
 
-                {errors.
-// @ts-ignore
-                description && <p className="field-error">{errors.description}</p>}
+                {errors.description && <p className="field-error">{errors.description}</p>}
             </div>
 
             <div className="form-field">

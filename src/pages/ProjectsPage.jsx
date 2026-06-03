@@ -9,9 +9,10 @@ import Button from "../shared/components/Butoon/Button";
 import Modal from "../shared/components/Modal/Modal";
 // @ts-ignore
 import "./style/ProjectsPage.css";
+import { useLocalStorage } from "../shared/hooks/useLocalStorage";
 
 export default function ProjectsPage() {
-    const [projects, setProjects] = useState(mockProjects);
+    const [projects, setProjects] = useLocalStorage("taskflow", mockProjects);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     const hasProjects = projects.length > 0;
