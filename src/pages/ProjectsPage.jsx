@@ -9,6 +9,7 @@ import Button from "../shared/components/Butoon/Button";
 import Modal from "../shared/components/Modal/Modal";
 import ConfirmDialog from "../shared/components/ConfirmDialog/ConfirmDialog";
 import SearchInput from "../shared/SearchInput/SearchInput";
+import SegmentedFilter from "../shared/components/SegmentedFilter/SegmentedFilter";
 // @ts-ignore
 import "./style/ProjectsPage.css";
 import { useLocalStorage } from "../shared/hooks/useLocalStorage";
@@ -19,6 +20,7 @@ export default function ProjectsPage() {
     const [projectToDelete, setprojectToDelete] = useState(null);
     const [projectToEdit, setProjectToEdit] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
+    const [statusFilter, setStatusFilter] = useState("all");
 
 
 
@@ -65,25 +67,33 @@ export default function ProjectsPage() {
     // delet project oprations
     const hasProjects = projects.length > 0;
 
-    // /===  serch opration///===
-    const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+    // /===  serch opration  filter opration///===
+    const statusFilterOptions = [
+        {label: "All", value: "all"},
+        {label: "Active", value: "active"},
+        {label: "Archived", value: "archived"},
+    ];
+   const normalizedSearchQuery = searchQuery.trim().toLowerCase();
 
-    const filteredProjects = projects.filter((project) => {
-        const projectName = project.name.toLowerCase();
-        const projectDescription = project.description.toLowerCase();
-        const projectStatus = project.status.toLowerCase();
+   const visibleProjects = projects.filter((project) => {
+       const projectName = project.name.toLowerCase();
+       const projectDescription = project.description.toLowerCase();
+       const projectStatus = project.status.toLowerCase();
 
-        return (
-            projectName.includes(normalizedSearchQuery) ||
-            projectDescription.includes(normalizedSearchQuery) ||
-            projectStatus.includes(normalizedSearchQuery)
-        );
-    });
+       const matchesSearch =
+           projectName.includes(normalizedSearchQuery) ||
+           projectDescription.includes(normalizedSearchQuery) ||
+           projectStatus.includes(normalizedSearchQuery);
 
-    const hasSearchQuery = normalizedSearchQuery.length > 0;
-    const hasFilteredProjects = filteredProjects.length > 0;
+       const matchesStatus = statusFilter === "all" || project.status === statusFilter;
 
- // /===  serch opration///=== // /===  serch opration///===
+       return matchesSearch && matchesStatus;
+   });
+
+   const hasVisibleProjects = visibleProjects.length > 0;
+   const hasActiveControls = normalizedSearchQuery.length > 0 || statusFilter !== "all";
+
+ // /===  serch opration///=== // /===  filter opration///===
 
 
 
@@ -132,11 +142,12 @@ export default function ProjectsPage() {
                     onClear={() => setSearchQuery("")}
                     placeholder="Search projects by name, description, or status..."
                 />
+                <SegmentedFilter options={statusFilterOptions} value={statusFilter} onChange={setStatusFilter} />
             </div>
             {hasProjects ? (
-                hasFilteredProjects ? (
+                hasVisibleProjects ? (
                     <section className="projects-grid">
-                        {filteredProjects.map((project) => (
+                        {visibleProjects.map((project) => (
                             <ProjectCard
                                 key={project.id}
                                 project={project}
@@ -148,10 +159,20 @@ export default function ProjectsPage() {
                 ) : (
                     <EmptyState
                         title="No matching projects"
-                        description={`We couldn't find any projects matching "${searchQuery}". Try a different keyword.`}
+                        description={
+                            hasActiveControls
+                                ? "No projects match your current search or filter. Try changing the keyword or status."
+                                : "No projects to show right now."
+                        }
                         action={
-                            <Button variant="secondary" onClick={() => setSearchQuery("")}>
-                                Clear Search
+                            <Button
+                                variant="secondary"
+                                onClick={() => {
+                                    setSearchQuery("");
+                                    setStatusFilter("all");
+                                }}
+                            >
+                                Reset Filters
                             </Button>
                         }
                     />

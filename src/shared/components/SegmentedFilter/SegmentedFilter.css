@@ -1,0 +1,50 @@
+.segmented-filter {
+  width: fit-content;
+  padding: 5px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background:
+    linear-gradient(180deg, var(--color-surface), var(--color-surface-soft));
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.segmented-filter-item {
+  height: 38px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-text-muted);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 800;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.segmented-filter-item:hover {
+  color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.segmented-filter-item.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-violet));
+  box-shadow: 0 12px 26px rgba(99, 102, 241, 0.25);
+}
+
+@media (max-width: 760px) {
+  .segmented-filter {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .segmented-filter-item {
+    flex: 1;
+  }
+}
