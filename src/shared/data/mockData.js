@@ -1,30 +1,30 @@
 import { TASK_PRIORITY, TASK_STATUS } from "../constants/taskConstants";
 
 export const mockProjects = [
-  {
-    id: "project-1",
-    name: "Website Redesign",
-    description: "Improve the landing page and dashboard experience.",
-    status: "active",
-    createdAt: "2026-06-01",
-    updatedAt: "2026-06-02",
-  },
-  {
-    id: "project-2",
-    name: "Mobile App Planning",
-    description: "Prepare roadmap and UI structure for the mobile app.",
-    status: "active",
-    createdAt: "2026-06-01",
-    updatedAt: "2026-06-02",
-  },
-  {
-    id: "project-3",
-    name: "Marketing Dashboard",
-    description: "Track campaigns, conversions, and weekly reports.",
-    status: "archived",
-    createdAt: "2026-05-20",
-    updatedAt: "2026-05-28",
-  },
+//   {
+//     id: "project-1",
+//     name: "Website Redesign",
+//     description: "Improve the landing page and dashboard experience.",
+//     status: "active",
+//     createdAt: "2026-06-01",
+//     updatedAt: "2026-06-02",
+//   },
+//   {
+//     id: "project-2",
+//     name: "Mobile App Planning",
+//     description: "Prepare roadmap and UI structure for the mobile app.",
+//     status: "active",
+//     createdAt: "2026-06-01",
+//     updatedAt: "2026-06-02",
+//   },
+//   {
+//     id: "project-3",
+//     name: "Marketing Dashboard",
+//     description: "Track campaigns, conversions, and weekly reports.",
+//     status: "archived",
+//     createdAt: "2026-05-20",
+//     updatedAt: "2026-05-28",
+//   },
 ];
 
 export const mockTasks = [
