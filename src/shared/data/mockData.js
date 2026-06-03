@@ -1,0 +1,75 @@
+import { TASK_PRIORITY, TASK_STATUS } from "../constants/taskConstants";
+
+export const mockProjects = [
+  {
+    id: "project-1",
+    name: "Website Redesign",
+    description: "Improve the landing page and dashboard experience.",
+    status: "active",
+    createdAt: "2026-06-01",
+    updatedAt: "2026-06-02",
+  },
+  {
+    id: "project-2",
+    name: "Mobile App Planning",
+    description: "Prepare roadmap and UI structure for the mobile app.",
+    status: "active",
+    createdAt: "2026-06-01",
+    updatedAt: "2026-06-02",
+  },
+  {
+    id: "project-3",
+    name: "Marketing Dashboard",
+    description: "Track campaigns, conversions, and weekly reports.",
+    status: "archived",
+    createdAt: "2026-05-20",
+    updatedAt: "2026-05-28",
+  },
+];
+
+export const mockTasks = [
+  {
+    id: "task-1",
+    projectId: "project-1",
+    title: "Create dashboard layout",
+    description: "Build sidebar, topbar, and responsive shell.",
+    status: TASK_STATUS.COMPLETED,
+    priority: TASK_PRIORITY.HIGH,
+    dueDate: "2026-06-04",
+    createdAt: "2026-06-01",
+    updatedAt: "2026-06-02",
+  },
+  {
+    id: "task-2",
+    projectId: "project-1",
+    title: "Design statistics cards",
+    description: "Create reusable cards for dashboard metrics.",
+    status: TASK_STATUS.IN_PROGRESS,
+    priority: TASK_PRIORITY.MEDIUM,
+    dueDate: "2026-06-06",
+    createdAt: "2026-06-02",
+    updatedAt: "2026-06-03",
+  },
+  {
+    id: "task-3",
+    projectId: "project-2",
+    title: "Prepare feature list",
+    description: "Define MVP features and future improvements.",
+    status: TASK_STATUS.TODO,
+    priority: TASK_PRIORITY.LOW,
+    dueDate: "2026-06-08",
+    createdAt: "2026-06-02",
+    updatedAt: "2026-06-03",
+  },
+  {
+    id: "task-4",
+    projectId: "project-3",
+    title: "Review analytics widgets",
+    description: "Check charts and campaign performance cards.",
+    status: TASK_STATUS.COMPLETED,
+    priority: TASK_PRIORITY.HIGH,
+    dueDate: "2026-06-03",
+    createdAt: "2026-05-25",
+    updatedAt: "2026-06-01",
+  },
+];
