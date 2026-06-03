@@ -1,0 +1,66 @@
+.empty-state {
+  position: relative;
+  min-height: 360px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 42px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.76)),
+    radial-gradient(circle at top, var(--color-primary-soft), transparent 36%);
+  border: 1px dashed rgba(99, 102, 241, 0.35);
+  box-shadow: var(--shadow-md);
+}
+
+.empty-state::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  top: -90px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.1);
+  filter: blur(2px);
+  z-index: -1;
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-state h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 26px;
+  letter-spacing: -0.04em;
+}
+
+.empty-state p {
+  margin: 12px auto 22px;
+  max-width: 430px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.empty-state-action {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .empty-state {
+    min-height: 320px;
+    padding: 30px 22px;
+  }
+}

@@ -1,11 +1,12 @@
 import {CheckCircle2, FolderKanban, ListTodo, Flame} from "lucide-react";
-import StatsCard from "../features/dashboard/components/StatsCard";
+import StatsCard from "../shared/components/StatCard/StatsCard";
 import {mockProjects, mockTasks} from "../shared/data/mockData";
 import {TASK_PRIORITY, TASK_STATUS} from "../shared/constants/taskConstants";
-import ProjectCard from "../features/projects/components/ProjectCard";
-import {Plus} from "lucide-react";
+// import ProjectCard from "../features/projects/components/ProjectCard";
+// import {Plus} from "lucide-react";
 // @ts-ignore
 import "../pages/style/DashboardPage.css";
+import PageHeader from "../shared/components/PageHeader/PageHeader";
 
 export default function DashboardPage() {
     const totalProjects = mockProjects.length;
@@ -15,16 +16,13 @@ export default function DashboardPage() {
 
     const highPriorityTasks = mockTasks.filter((task) => task.priority === TASK_PRIORITY.HIGH).length;
 
-    const hasProjects = mockProjects.length > 0;
     return (
         <div className="dashboard-page">
             <div className="dashboard-header">
-                <div>
-                    <p>Overview</p>
-                    <h1>Welcome back, Adi</h1>
-                </div>
-
-                <span>Track your projects and team workflow.</span>
+                <PageHeader
+            eyebrow="Overview"
+            title="Welcome back, Adi"
+            description="Track your projects, tasks, priorities, and team workflow from one clean dashboard." action={undefined}                />
             </div>
 
             <section className="stats-grid">
@@ -64,24 +62,6 @@ export default function DashboardPage() {
                     delay={0.24}
                 />
             </section>
-            <>
-                {hasProjects ? (
-                    <section className="projects-grid">
-                        {mockProjects.map((project) => (
-                            <ProjectCard key={project.id} project={project} />
-                        ))}
-                    </section>
-                ) : (
-                    <div className="projects-empty-state">
-                        <h3>No projects yet</h3>
-                        <p>Create your first project to start organizing tasks and workflow.</p>
-                        <button className="create-project-btn">
-                            <Plus size={18} />
-                            <span>Create Project</span>
-                        </button>
-                    </div>
-                )}
-            </>
-        </div>  
+        </div>
     );
 }

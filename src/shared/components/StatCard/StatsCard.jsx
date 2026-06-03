@@ -1,5 +1,5 @@
 import {motion} from "framer-motion";
-import "./StatsCard.css";
+import "../StatCard/StatsCard.css"
 
 export default function StatsCard({title, value, description, icon: Icon, accent = "indigo", delay = 0}) {
     return (

@@ -1,12 +1,48 @@
 * {
   box-sizing: border-box;
 }
+:root {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f8fafc;
+
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-soft: #94a3b8;
+
+  --color-border: #e2e8f0;
+  --color-border-soft: rgba(226, 232, 240, 0.8);
+
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-primary-soft: rgba(99, 102, 241, 0.12);
+
+  --color-violet: #8b5cf6;
+  --color-emerald: #10b981;
+  --color-rose: #f43f5e;
+  --color-red: #ef4444;
+
+  --shadow-sm: 0 12px 24px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 24px 60px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 34px 80px rgba(15, 23, 42, 0.12);
+
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 34px;
+
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.28s ease;
+}
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
-  background: #f8fafc;
-  color: #0f172a;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 button,
@@ -25,15 +61,12 @@ a {
   text-decoration: none;
 }
 
-
-/* dashboardlayout style */
-
 .dashboard-layout {
   min-height: 100vh;
   display: flex;
   background:
-    radial-gradient(circle at top right, rgba(99, 102, 241, 0.08), transparent 28%),
-    #f8fafc;
+    radial-gradient(circle at top right, var(--color-primary-soft), transparent 28%),
+    var(--color-bg);
 }
 
 .main-area {
@@ -47,10 +80,7 @@ a {
   flex: 1;
   padding: 32px;
 }
-/* dashboardlayout style */
 
-
-/* sidebar ovver lay style */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -58,4 +88,9 @@ a {
   background: rgba(15, 23, 42, 0.35);
   backdrop-filter: blur(4px);
 }
-/* sidebar ovver lay style */
+
+@media (max-width: 700px) {
+  .page-content {
+    padding: 22px;
+  }
+}

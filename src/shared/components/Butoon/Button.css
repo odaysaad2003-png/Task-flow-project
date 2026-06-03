@@ -1,0 +1,53 @@
+.app-button {
+  height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.app-button:hover {
+  transform: translateY(-2px);
+}
+
+.app-button-primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-violet));
+  box-shadow:
+    0 16px 34px rgba(99, 102, 241, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.app-button-primary:hover {
+  box-shadow:
+    0 22px 42px rgba(99, 102, 241, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+.app-button-secondary {
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-button-secondary:hover {
+  color: var(--color-primary-dark);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+@media (max-width: 700px) {
+  .app-button {
+    width: 100%;
+  }
+}
