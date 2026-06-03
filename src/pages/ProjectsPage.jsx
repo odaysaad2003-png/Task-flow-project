@@ -8,6 +8,7 @@ import EmptyState from "../shared/components/EmptyState/EmptyState";
 import Button from "../shared/components/Butoon/Button";
 import Modal from "../shared/components/Modal/Modal";
 import ConfirmDialog from "../shared/components/ConfirmDialog/ConfirmDialog";
+import SearchInput from "../shared/SearchInput/SearchInput";
 // @ts-ignore
 import "./style/ProjectsPage.css";
 import { useLocalStorage } from "../shared/hooks/useLocalStorage";
@@ -17,6 +18,8 @@ export default function ProjectsPage() {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [projectToDelete, setprojectToDelete] = useState(null);
     const [projectToEdit, setProjectToEdit] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
+
 
 
 
@@ -62,6 +65,29 @@ export default function ProjectsPage() {
     // delet project oprations
     const hasProjects = projects.length > 0;
 
+    // /===  serch opration///===
+    const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
+    const filteredProjects = projects.filter((project) => {
+        const projectName = project.name.toLowerCase();
+        const projectDescription = project.description.toLowerCase();
+        const projectStatus = project.status.toLowerCase();
+
+        return (
+            projectName.includes(normalizedSearchQuery) ||
+            projectDescription.includes(normalizedSearchQuery) ||
+            projectStatus.includes(normalizedSearchQuery)
+        );
+    });
+
+    const hasSearchQuery = normalizedSearchQuery.length > 0;
+    const hasFilteredProjects = filteredProjects.length > 0;
+
+ // /===  serch opration///=== // /===  serch opration///===
+
+
+
+
     function openCreateModal() {
         setIsCreateModalOpen(true);
     }
@@ -99,17 +125,37 @@ export default function ProjectsPage() {
                     </Button>
                 }
             />
+            <div className="projects-toolbar">
+                <SearchInput
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                    onClear={() => setSearchQuery("")}
+                    placeholder="Search projects by name, description, or status..."
+                />
+            </div>
             {hasProjects ? (
-                <section className="projects-grid">
-                    {projects.map((project) => (
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                            onDelete={handleAskDelete}
-                            onEdit={handleAskEdit}
-                        />
-                    ))}
-                </section>
+                hasFilteredProjects ? (
+                    <section className="projects-grid">
+                        {filteredProjects.map((project) => (
+                            <ProjectCard
+                                key={project.id}
+                                project={project}
+                                onEdit={handleAskEdit}
+                                onDelete={handleAskDelete}
+                            />
+                        ))}
+                    </section>
+                ) : (
+                    <EmptyState
+                        title="No matching projects"
+                        description={`We couldn't find any projects matching "${searchQuery}". Try a different keyword.`}
+                        action={
+                            <Button variant="secondary" onClick={() => setSearchQuery("")}>
+                                Clear Search
+                            </Button>
+                        }
+                    />
+                )
             ) : (
                 <EmptyState
                     icon={FolderKanban}

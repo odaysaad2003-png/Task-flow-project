@@ -14,7 +14,19 @@
   color: var(--color-text-muted);
   line-height: 1.7;
 }
+.projects-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
 
+@media (max-width: 760px) {
+  .projects-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 @media (max-width: 1180px) {
   .projects-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
