@@ -1,8 +1,23 @@
-import {CalendarDays, MoreHorizontal, FolderKanban} from "lucide-react";
+import {CalendarDays, FolderKanban, Pencil, Trash2} from "lucide-react";
+import ActionDropdown from "../../../shared/components/ActionDropdown/ActionDropdown";
 import "../style/ProjectCard.css";
 
 export default function ProjectCard({project, onDelete, onEdit}) {
     const isActive = project.status === "active";
+
+    const projectActions = [
+        {
+            label: "Edit project",
+            icon: Pencil,
+            onClick: () => onEdit(project),
+        },
+        {
+            label: "Delete project",
+            icon: Trash2,
+            danger: true,
+            onClick: () => onDelete(project),
+        },
+    ];
 
     return (
         <article className="project-card">
@@ -11,10 +26,9 @@ export default function ProjectCard({project, onDelete, onEdit}) {
                     <FolderKanban size={22} />
                 </div>
 
-                <button className="project-menu-btn">
-                    <MoreHorizontal size={20} />
-                </button>
+                <ActionDropdown items={projectActions} />
             </div>
+
             <div className="project-card-body">
                 <div className="project-title-row">
                     <h3>{project.name}</h3>
@@ -24,15 +38,12 @@ export default function ProjectCard({project, onDelete, onEdit}) {
 
                 <p>{project.description}</p>
             </div>
+
             <div className="project-card-footer">
                 <div className="project-date">
                     <CalendarDays size={16} />
                     <span>Updated {project.updatedAt}</span>
                 </div>
-            </div>
-            <div className="project-card-actions">
-                <button onClick={() => onEdit(project)}>Edit</button>
-                <button onClick={() => onDelete(project)}>Delete</button>
             </div>
         </article>
     );
