@@ -1,7 +1,7 @@
 import {CalendarDays, MoreHorizontal, FolderKanban} from "lucide-react";
 import "../style/ProjectCard.css";
 
-export default function ProjectCard({project, onDelete}) {
+export default function ProjectCard({project, onDelete, onEdit}) {
     const isActive = project.status === "active";
 
     return (
@@ -30,7 +30,10 @@ export default function ProjectCard({project, onDelete}) {
                     <span>Updated {project.updatedAt}</span>
                 </div>
             </div>
-            <button onClick={() => onDelete(project)}>Delete</button>{" "}
+            <div className="project-card-actions">
+                <button onClick={() => onEdit(project)}>Edit</button>
+                <button onClick={() => onDelete(project)}>Delete</button>
+            </div>
         </article>
     );
 }

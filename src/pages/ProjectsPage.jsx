@@ -16,7 +16,38 @@ export default function ProjectsPage() {
     const [projects, setProjects] = useLocalStorage("taskflow", mockProjects); //
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [projectToDelete, setprojectToDelete] = useState(null);
+    const [projectToEdit, setProjectToEdit] = useState(null);
 
+
+
+    // edit project oprations
+    function handleAskEdit(project) {
+        setProjectToEdit(project);
+    }
+
+    function closeEditModal() {
+        setProjectToEdit(null);
+    }
+    function handleUpdateProject(updatedProjectData) {
+        const today = new Date().toISOString().split("T")[0];
+
+        setProjects((currentProjects) =>
+            currentProjects.map((project) =>
+                project.id === projectToEdit.id
+                    ? {
+                          ...project,
+                          name: updatedProjectData.name,
+                          description: updatedProjectData.description,
+                          status: updatedProjectData.status,
+                          updatedAt: today,
+                      }
+                    : project
+            )
+        );
+
+        closeEditModal();
+    }
+    // edit project oprations
     // delet project oprations
     // @ts-ignore
     function handleAskDelete(projects) {
@@ -26,6 +57,7 @@ export default function ProjectsPage() {
         setProjects((currentprojects) => currentprojects.filter((project) => project.id !== projectToDelete.id));
         setprojectToDelete(null);
     }
+
 
     // delet project oprations
     const hasProjects = projects.length > 0;
@@ -70,7 +102,12 @@ export default function ProjectsPage() {
             {hasProjects ? (
                 <section className="projects-grid">
                     {projects.map((project) => (
-                        <ProjectCard key={project.id} project={project} onDelete={handleAskDelete} />
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                            onDelete={handleAskDelete}
+                            onEdit={handleAskEdit}
+                        />
                     ))}
                 </section>
             ) : (
@@ -96,7 +133,7 @@ export default function ProjectsPage() {
             <ConfirmDialog
                 isOpen={Boolean(projectToDelete)}
                 type="danger"
-                title="Delete employee?"
+                title="Delete project?"
                 description={
                     projectToDelete
                         ? `Are you sure you want to delete ${projectToDelete.name}? This action cannot be undone.`
@@ -107,6 +144,25 @@ export default function ProjectsPage() {
                 onConfirm={handleConfirmDelete}
                 onCancel={() => setprojectToDelete(null)}
             />
+            <Modal
+                isOpen={Boolean(projectToEdit)}
+                onClose={closeEditModal}
+                title="Edit project"
+                description="Update project information, status, and progress details."
+            >
+                {projectToEdit && (
+                    <CreateProjectForm
+                        initialValues={{
+                            name: projectToEdit.name,
+                            description: projectToEdit.description,
+                            status: projectToEdit.status,
+                        }}
+                        submitLabel="Save Changes"
+                        onSubmit={handleUpdateProject}
+                        onCancel={closeEditModal}
+                    />
+                )}
+            </Modal>
         </div>
     );
 }
