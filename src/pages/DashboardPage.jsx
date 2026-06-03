@@ -7,13 +7,16 @@ import {TASK_PRIORITY, TASK_STATUS} from "../shared/constants/taskConstants";
 // @ts-ignore
 import "../pages/style/DashboardPage.css";
 import PageHeader from "../shared/components/PageHeader/PageHeader";
-
+import {useLocalStorage} from "../shared/hooks/useLocalStorage";
 export default function DashboardPage() {
-    const totalProjects = mockProjects.length;
+
+
+
+    const [projects] = useLocalStorage("taskflow-projects", mockProjects);
+    const totalProjects = projects.length;
+
     const totalTasks = mockTasks.length;
-
     const completedTasks = mockTasks.filter((task) => task.status === TASK_STATUS.COMPLETED).length;
-
     const highPriorityTasks = mockTasks.filter((task) => task.priority === TASK_PRIORITY.HIGH).length;
 
     return (

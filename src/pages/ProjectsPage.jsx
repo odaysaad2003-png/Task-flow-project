@@ -7,14 +7,27 @@ import PageHeader from "../shared/components/PageHeader/PageHeader";
 import EmptyState from "../shared/components/EmptyState/EmptyState";
 import Button from "../shared/components/Butoon/Button";
 import Modal from "../shared/components/Modal/Modal";
+import ConfirmDialog from "../shared/components/ConfirmDialog/ConfirmDialog";
 // @ts-ignore
 import "./style/ProjectsPage.css";
 import { useLocalStorage } from "../shared/hooks/useLocalStorage";
 
 export default function ProjectsPage() {
-    const [projects, setProjects] = useLocalStorage("taskflow", mockProjects);
+    const [projects, setProjects] = useLocalStorage("taskflow", mockProjects); //
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [projectToDelete, setprojectToDelete] = useState(null);
 
+    // delet project oprations
+    // @ts-ignore
+    function handleAskDelete(projects) {
+        setprojectToDelete(projects);
+    }
+    function handleConfirmDelete() {
+        setProjects((currentprojects) => currentprojects.filter((project) => project.id !== projectToDelete.id));
+        setprojectToDelete(null);
+    }
+
+    // delet project oprations
     const hasProjects = projects.length > 0;
 
     function openCreateModal() {
@@ -54,11 +67,10 @@ export default function ProjectsPage() {
                     </Button>
                 }
             />
-
             {hasProjects ? (
                 <section className="projects-grid">
                     {projects.map((project) => (
-                        <ProjectCard key={project.id} project={project} />
+                        <ProjectCard key={project.id} project={project} onDelete={handleAskDelete} />
                     ))}
                 </section>
             ) : (
@@ -73,7 +85,6 @@ export default function ProjectsPage() {
                     }
                 />
             )}
-
             <Modal
                 isOpen={isCreateModalOpen}
                 onClose={closeCreateModal}
@@ -82,6 +93,20 @@ export default function ProjectsPage() {
             >
                 <CreateProjectForm onSubmit={handleCreateProject} onCancel={closeCreateModal} />
             </Modal>
+            <ConfirmDialog
+                isOpen={Boolean(projectToDelete)}
+                type="danger"
+                title="Delete employee?"
+                description={
+                    projectToDelete
+                        ? `Are you sure you want to delete ${projectToDelete.name}? This action cannot be undone.`
+                        : ""
+                }
+                confirmLabel="Delete"
+                cancelLabel="Cancel"
+                onConfirm={handleConfirmDelete}
+                onCancel={() => setprojectToDelete(null)}
+            />
         </div>
     );
 }

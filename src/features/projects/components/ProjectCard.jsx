@@ -1,7 +1,7 @@
 import {CalendarDays, MoreHorizontal, FolderKanban} from "lucide-react";
 import "../style/ProjectCard.css";
 
-export default function ProjectCard({project}) {
+export default function ProjectCard({project, onDelete}) {
     const isActive = project.status === "active";
 
     return (
@@ -15,7 +15,6 @@ export default function ProjectCard({project}) {
                     <MoreHorizontal size={20} />
                 </button>
             </div>
-
             <div className="project-card-body">
                 <div className="project-title-row">
                     <h3>{project.name}</h3>
@@ -25,13 +24,13 @@ export default function ProjectCard({project}) {
 
                 <p>{project.description}</p>
             </div>
-
             <div className="project-card-footer">
                 <div className="project-date">
                     <CalendarDays size={16} />
                     <span>Updated {project.updatedAt}</span>
                 </div>
             </div>
+            <button onClick={() => onDelete(project)}>Delete</button>{" "}
         </article>
     );
 }
