@@ -30,6 +30,8 @@ export default function DashboardPage() {
                     value={totalProjects}
                     description="Active and archived projects"
                     icon={FolderKanban}
+                    accent="indigo"
+                    delay={0}
                 />
 
                 <StatsCard
@@ -37,6 +39,8 @@ export default function DashboardPage() {
                     value={totalTasks}
                     description="All tasks across projects"
                     icon={ListTodo}
+                    accent="violet"
+                    delay={0.08}
                 />
 
                 <StatsCard
@@ -44,6 +48,8 @@ export default function DashboardPage() {
                     value={completedTasks}
                     description="Tasks finished successfully"
                     icon={CheckCircle2}
+                    accent="emerald"
+                    delay={0.16}
                 />
 
                 <StatsCard
@@ -51,6 +57,8 @@ export default function DashboardPage() {
                     value={highPriorityTasks}
                     description="Tasks that need attention"
                     icon={Flame}
+                    accent="rose"
+                    delay={0.24}
                 />
             </section>
         </div>

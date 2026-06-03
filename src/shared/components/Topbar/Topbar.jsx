@@ -1,12 +1,18 @@
-import {Bell, Search, Moon, Plus, Menu} from "lucide-react";
+import {Bell, Search, Moon, Plus, Menu, X} from "lucide-react";
 import "./Topbar.css";
 
-export default function Topbar({onMenuClick}) {
+export default function Topbar({onMenuClick, isSidebarOpen}) {
     return (
         <header className="topbar">
             <div className="topbar-left">
-                <button className="menu-btn" onClick={onMenuClick}>
-                    <Menu size={20} />
+                <button
+                    className={`menu-btn ${isSidebarOpen ? "menu-btn-open" : ""}`}
+                    onClick={onMenuClick}
+                    aria-label="Toggle sidebar menu"
+                >
+                    <span className="menu-icon-line" />
+                    <span className="menu-icon-line" />
+                    <span className="menu-icon-line" />
                 </button>
 
                 <div className="topbar-search">
