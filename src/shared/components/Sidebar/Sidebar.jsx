@@ -1,10 +1,15 @@
 import {NavLink} from "react-router-dom";
-import {LayoutDashboard, FolderKanban, Columns3, Settings, Sparkles, X} from "lucide-react";
+import {LayoutDashboard, FolderKanban, Columns3, Settings, Sparkles, X, ListTodo} from "lucide-react";
 import "./Sidebar.css";
 
 const navItems = [
     {label: "Dashboard", path: "/dashboard", icon: LayoutDashboard},
     {label: "Projects", path: "/projects", icon: FolderKanban},
+    {
+        label: "Tasks",
+        path: "/tasks",
+        icon: ListTodo,
+    },
     {label: "Board", path: "/board", icon: Columns3},
     {label: "Settings", path: "/settings", icon: Settings},
 ];

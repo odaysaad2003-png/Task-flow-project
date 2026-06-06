@@ -10,6 +10,7 @@ import ProjectsPage from "../pages/ProjectsPage";
 import BoardPage from "../pages/BoardPage";
 // @ts-ignore
 import SettingsPage from "../pages/SettingsPage";
+import TasksPage from "../pages/TasksPage";
 
 export function AppRoutes() {
     return (
@@ -21,6 +22,7 @@ export function AppRoutes() {
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/board" element={<BoardPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/tasks" element={<TasksPage />} />
             </Route>
         </Routes>
     );
