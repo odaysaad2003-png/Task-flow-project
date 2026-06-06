@@ -5,6 +5,7 @@ import EmptyState from "../shared/components/EmptyState/EmptyState";
 
 import {useLocalStorage} from "../shared/hooks/useLocalStorage";
 import {mockTasks} from "../shared/data/mockData";
+import TaskCard from "../features/tasks/components/TaskCard";
 // @ts-ignore
 import "./style/TasksPage.css";
 
@@ -24,7 +25,11 @@ const [tasks, setTasks] = useLocalStorage("taskflow-tasks", mockTasks);
             />
 
             {hasTasks ? (
-                <section className="tasks-grid">Tasks will be rendered here.</section>
+                <section className="tasks-grid">{
+                    tasks.map((task)=>{
+                        return <TaskCard key={task.id} task={task}/>
+                    })
+                }</section>
             ) : (
                 <EmptyState
                     icon={ListTodo}
