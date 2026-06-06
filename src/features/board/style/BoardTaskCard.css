@@ -1,0 +1,56 @@
+.board-task-card {
+  padding: 16px;
+  border-radius: 22px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.board-task-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.32);
+  box-shadow: var(--shadow-md);
+}
+
+.board-task-card h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+
+.board-task-card p {
+  margin: 8px 0 14px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.board-priority {
+  width: fit-content;
+  padding: 6px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: capitalize;
+}
+
+.priority-low {
+  color: #0369a1;
+  background: rgba(14, 165, 233, 0.12);
+}
+
+.priority-medium {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.priority-high {
+  color: #be123c;
+  background: rgba(244, 63, 94, 0.13);
+}
