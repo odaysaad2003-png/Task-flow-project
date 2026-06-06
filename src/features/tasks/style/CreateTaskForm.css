@@ -1,0 +1,91 @@
+.create-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.form-field label {
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  outline: 0;
+  border-radius: 18px;
+  padding: 14px 16px;
+  color: var(--color-text);
+  background:
+    linear-gradient(180deg, var(--color-surface), var(--color-surface-soft));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 10px 22px rgba(15, 23, 42, 0.03);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 118px;
+  line-height: 1.6;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--color-text-soft);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  transform: translateY(-1px);
+  border-color: rgba(99, 102, 241, 0.72);
+  background: var(--color-surface);
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.12),
+    0 16px 32px rgba(15, 23, 42, 0.06);
+}
+
+.field-error {
+  margin: 0;
+  color: var(--color-red);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+}

@@ -9,6 +9,9 @@ import TaskCard from "../features/tasks/components/TaskCard";
 import SearchInput from "../shared/SearchInput/SearchInput";
 import SegmentedFilter from "../shared/components/SegmentedFilter/SegmentedFilter";
 // @ts-ignore
+import Modal from "../shared/components/Modal/Modal";
+import CreateTaskForm from "../features/tasks/components/CreateTaskForm";
+import {mockProjects} from "../shared/data/mockData";
 import "./style/TasksPage.css";
 import {useState} from "react";
 
@@ -27,15 +30,22 @@ const priorityOptions = [
 ];
 
 export default function TasksPage() {
-
     const [tasks, setTasks] = useLocalStorage("taskflow-tasks", mockTasks);
+    const [projects] = useLocalStorage("taskflow", mockProjects);
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [priorityFilter, setPriorityFilter] = useState("all");
 
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    function openCreateModal() {
+        setIsCreateModalOpen(true);
+    }
+
+    function closeCreateModal() {
+        setIsCreateModalOpen(false);
+    }
 
     const normalizedSearchQuery = searchQuery.trim().toLowerCase();
-
 
     const visibleTasks = tasks.filter((task) => {
         const taskTitle = task.title.toLowerCase();
@@ -51,16 +61,47 @@ export default function TasksPage() {
         return matchesSearch && matchesStatus && matchesPriority;
     });
 
-
     const hasTasks = tasks.length > 0;
     const hasVisibleTasks = visibleTasks.length > 0;
+
+
+
+
+
+
+
+    function handleCreateTask(taskData) {
+        console.log(taskData);
+        const today = new Date().toISOString().split("T")[0];
+
+        const newTask = {
+            id: crypto.randomUUID(),
+            projectId: taskData.projectId,
+            title: taskData.title,
+            description: taskData.description,
+            status: taskData.status,
+            priority: taskData.priority,
+            dueDate: taskData.dueDate,
+            createdAt: today,
+            updatedAt: today,
+        };
+
+        setTasks((currentTasks) => [newTask, ...currentTasks]);
+        closeCreateModal();
+    }
+
+
     return (
         <div className="tasks-page">
             <PageHeader
                 eyebrow="Tasks"
                 title="Manage your tasks"
                 description="Create, organize, and track tasks across all your projects."
-                action={<Button icon={Plus}>New Task</Button>}
+                action={
+                    <Button icon={Plus} onClick={openCreateModal}>
+                        New Task
+                    </Button>
+                }
             />
             <div className="tasks-toolbar">
                 <SearchInput
@@ -108,9 +149,22 @@ export default function TasksPage() {
                     icon={ListTodo}
                     title="No tasks yet"
                     description="Create your first task and connect it to a project to start tracking real work."
-                    action={<Button icon={Plus}>Create Task</Button>}
+                    action={
+                        <Button icon={Plus} onClick={openCreateModal}>
+                            Create Task
+                        </Button>
+                    }
                 />
             )}
+
+            <Modal
+                isOpen={isCreateModalOpen}
+                onClose={closeCreateModal}
+                title="Create new task"
+                description="Add a task, connect it to a project, and define its status, priority, and due date."
+            >
+                <CreateTaskForm projects={projects} onSubmit={handleCreateTask} onCancel={closeCreateModal} />
+            </Modal>
         </div>
     );
 }
