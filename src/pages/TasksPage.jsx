@@ -71,7 +71,6 @@ export default function TasksPage() {
 
 
     function handleCreateTask(taskData) {
-        console.log(taskData);
         const today = new Date().toISOString().split("T")[0];
 
         const newTask = {
