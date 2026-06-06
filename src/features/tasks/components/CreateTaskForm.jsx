@@ -11,10 +11,15 @@ const INITIAL_FORM_STATE = {
     dueDate: "",
 };
 
-export default function CreateTaskForm({projects, onSubmit, onCancel}) {
+export default function CreateTaskForm({
+    projects,
+    onSubmit,
+    onCancel,
+    initialValues = INITIAL_FORM_STATE,
+    submitLabel = "Create Task",
+}) {
     const [formData, setFormData] = useState(INITIAL_FORM_STATE);
     const [errors, setErrors] = useState({});
-
 
     function handleChange(event) {
         const {name, value} = event.target;
@@ -80,91 +85,90 @@ export default function CreateTaskForm({projects, onSubmit, onCancel}) {
         setFormData(INITIAL_FORM_STATE);
         setErrors({});
     }
-return (
-    <form className="create-task-form" onSubmit={handleSubmit}>
-        <div className="form-field">
-            <label htmlFor="task-project">Project</label>
-
-            <select id="task-project" name="projectId" value={formData.projectId} onChange={handleChange}>
-                <option value="">Select a project</option>
-
-                {projects.map((project) => (
-                    <option key={project.id} value={project.id}>
-                        {project.name}
-                    </option>
-                ))}
-            </select>
-
-            {errors.projectId && <p className="field-error">{errors.projectId}</p>}
-        </div>
-
-        <div className="form-field">
-            <label htmlFor="task-title">Task title</label>
-
-            <input
-                id="task-title"
-                name="title"
-                type="text"
-                placeholder="e.g. Build responsive navbar"
-                value={formData.title}
-                onChange={handleChange}
-            />
-
-            {errors.title && <p className="field-error">{errors.title}</p>}
-        </div>
-
-        <div className="form-field">
-            <label htmlFor="task-description">Description</label>
-
-            <textarea
-                id="task-description"
-                name="description"
-                rows="4"
-                placeholder="Describe what should be done..."
-                value={formData.description}
-                onChange={handleChange}
-            />
-
-            {errors.description && <p className="field-error">{errors.description}</p>}
-        </div>
-
-        <div className="form-grid">
+    return (
+        <form className="create-task-form" onSubmit={handleSubmit}>
             <div className="form-field">
-                <label htmlFor="task-status">Status</label>
+                <label htmlFor="task-project">Project</label>
 
-                <select id="task-status" name="status" value={formData.status} onChange={handleChange}>
-                    <option value="todo">Todo</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="completed">Completed</option>
+                <select id="task-project" name="projectId" value={formData.projectId} onChange={handleChange}>
+                    <option value="">Select a project</option>
+
+                    {projects.map((project) => (
+                        <option key={project.id} value={project.id}>
+                            {project.name}
+                        </option>
+                    ))}
                 </select>
+
+                {errors.projectId && <p className="field-error">{errors.projectId}</p>}
             </div>
 
             <div className="form-field">
-                <label htmlFor="task-priority">Priority</label>
+                <label htmlFor="task-title">Task title</label>
 
-                <select id="task-priority" name="priority" value={formData.priority} onChange={handleChange}>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
+                <input
+                    id="task-title"
+                    name="title"
+                    type="text"
+                    placeholder="e.g. Build responsive navbar"
+                    value={formData.title}
+                    onChange={handleChange}
+                />
+
+                {errors.title && <p className="field-error">{errors.title}</p>}
             </div>
-        </div>
 
-        <div className="form-field">
-            <label htmlFor="task-due-date">Due date</label>
+            <div className="form-field">
+                <label htmlFor="task-description">Description</label>
 
-            <input id="task-due-date" name="dueDate" type="date" value={formData.dueDate} onChange={handleChange} />
+                <textarea
+                    id="task-description"
+                    name="description"
+                    rows="4"
+                    placeholder="Describe what should be done..."
+                    value={formData.description}
+                    onChange={handleChange}
+                />
 
-            {errors.dueDate && <p className="field-error">{errors.dueDate}</p>}
-        </div>
+                {errors.description && <p className="field-error">{errors.description}</p>}
+            </div>
 
-        <div className="form-actions">
-            <Button variant="secondary" onClick={onCancel}>
-                Cancel
-            </Button>
+            <div className="form-grid">
+                <div className="form-field">
+                    <label htmlFor="task-status">Status</label>
 
-            <Button type="submit">Create Task</Button>
-        </div>
-    </form>
-);
+                    <select id="task-status" name="status" value={formData.status} onChange={handleChange}>
+                        <option value="todo">Todo</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <div className="form-field">
+                    <label htmlFor="task-priority">Priority</label>
+
+                    <select id="task-priority" name="priority" value={formData.priority} onChange={handleChange}>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className="form-field">
+                <label htmlFor="task-due-date">Due date</label>
+
+                <input id="task-due-date" name="dueDate" type="date" value={formData.dueDate} onChange={handleChange} />
+
+                {errors.dueDate && <p className="field-error">{errors.dueDate}</p>}
+            </div>
+
+            <div className="form-actions">
+                <Button variant="secondary" onClick={onCancel}>
+                    Cancel
+                </Button>
+                <Button type="submit">{submitLabel}</Button>{" "}
+            </div>
+        </form>
+    );
 }

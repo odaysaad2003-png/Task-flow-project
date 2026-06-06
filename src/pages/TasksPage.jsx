@@ -14,6 +14,7 @@ import CreateTaskForm from "../features/tasks/components/CreateTaskForm";
 import {mockProjects} from "../shared/data/mockData";
 import "./style/TasksPage.css";
 import {useState} from "react";
+import ConfirmDialog from "../shared/components/ConfirmDialog/ConfirmDialog";
 
 const statusOptions = [
     {label: "All", value: "all"},
@@ -35,6 +36,8 @@ export default function TasksPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
     const [priorityFilter, setPriorityFilter] = useState("all");
+    const [taskToDelete, setTaskToDelete] = useState(null);
+    const [taskToEdit, setTaskToEdit] = useState(null);
 
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     function openCreateModal() {
@@ -95,6 +98,48 @@ export default function TasksPage() {
         return project ? project.name : "Unknown Project";
     }
 
+
+    // edit task operations
+    function handleAskEditTask(task) {
+        setTaskToEdit(task);
+    }
+
+    function closeEditModal() {
+        setTaskToEdit(null);
+    }
+
+    function handleUpdateTask(updatedTaskData) {
+        const today = new Date().toISOString().split("T")[0];
+
+        setTasks((currentTasks) =>
+            currentTasks.map((task) =>
+                task.id === taskToEdit.id
+                    ? {
+                          ...task,
+                          projectId: updatedTaskData.projectId,
+                          title: updatedTaskData.title,
+                          description: updatedTaskData.description,
+                          status: updatedTaskData.status,
+                          priority: updatedTaskData.priority,
+                          dueDate: updatedTaskData.dueDate,
+                          updatedAt: today,
+                      }
+                    : task
+            )
+        );
+
+        closeEditModal();
+    }
+    function handleAskDeleteTask(task) {
+        setTaskToDelete(task);
+    }
+
+    function handleConfirmDeleteTask() {
+        setTasks((currentTasks) => currentTasks.filter((task) => task.id !== taskToDelete.id));
+
+        setTaskToDelete(null);
+    }
+
     return (
         <div className="tasks-page">
             <PageHeader
@@ -126,7 +171,14 @@ export default function TasksPage() {
                 hasVisibleTasks ? (
                     <section className="tasks-grid">
                         {visibleTasks.map((task) => (
-                            <TaskCard key={task.id} task={task} getProjectName={getProjectName} />
+                            <TaskCard
+                                key={task.id}
+                                task={task}
+                                getProjectName={getProjectName}
+                                // @ts-ignore
+                                onEdit={handleAskEditTask}
+                                onDelete={handleAskDeleteTask}
+                            />
                         ))}
                     </section>
                 ) : (
@@ -169,6 +221,43 @@ export default function TasksPage() {
             >
                 <CreateTaskForm projects={projects} onSubmit={handleCreateTask} onCancel={closeCreateModal} />
             </Modal>
+            <Modal
+                isOpen={Boolean(taskToEdit)}
+                onClose={closeEditModal}
+                title="Edit task"
+                description="Update the task details, project, status, priority, and due date."
+            >
+                {taskToEdit && (
+                    <CreateTaskForm
+                        projects={projects}
+                        initialValues={{
+                            projectId: taskToEdit.projectId,
+                            title: taskToEdit.title,
+                            description: taskToEdit.description,
+                            status: taskToEdit.status,
+                            priority: taskToEdit.priority,
+                            dueDate: taskToEdit.dueDate,
+                        }}
+                        submitLabel="Save Changes"
+                        onSubmit={handleUpdateTask}
+                        onCancel={closeEditModal}
+                    />
+                )}
+            </Modal>
+            <ConfirmDialog
+                isOpen={Boolean(taskToDelete)}
+                type="danger"
+                title="Delete task?"
+                description={
+                    taskToDelete
+                        ? `Are you sure you want to delete "${taskToDelete.title}"? This action cannot be undone.`
+                        : ""
+                }
+                confirmLabel="Delete"
+                cancelLabel="Cancel"
+                onConfirm={handleConfirmDeleteTask}
+                onCancel={() => setTaskToDelete(null)}
+            />
         </div>
     );
 }

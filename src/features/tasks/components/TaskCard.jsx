@@ -1,4 +1,5 @@
-import {CalendarDays, CheckCircle2, Circle, Clock3, Flag, FolderKanban} from "lucide-react";
+import {CalendarDays, CheckCircle2, Circle, Clock3, Flag, FolderKanban, Pencil, Trash2} from "lucide-react";
+import ActionDropdown from "../../../shared/components/ActionDropdown/ActionDropdown";
 import "../style/TaskCard.css";
 
 const statusConfig = {
@@ -28,11 +29,25 @@ const priorityConfig = {
     },
 };
 
-export default function TaskCard({task, getProjectName}) {
+
+export default function TaskCard({task, getProjectName, onEdit, onDelete}) {
     const status = statusConfig[task.status] || statusConfig.todo;
     const priority = priorityConfig[task.priority] || priorityConfig.low;
 
     const StatusIcon = status.icon;
+    const taskActions = [
+        {
+            label: "Edit task",
+            icon: Pencil,
+            onClick: () => onEdit(task),
+        },
+        {
+            label: "Delete task",
+            icon: Trash2,
+            danger: true,
+            onClick: () => onDelete(task),
+        },
+    ];
 
     return (
         <article className="task-card">
@@ -47,6 +62,7 @@ export default function TaskCard({task, getProjectName}) {
                     <span>{priority.label}</span>
                 </div>
             </div>
+            <ActionDropdown items={taskActions} />
 
             <div className="task-card-body">
                 <h3>{task.title}</h3>
@@ -62,7 +78,6 @@ export default function TaskCard({task, getProjectName}) {
                     <CalendarDays size={16} />
                     <span>Due {task.dueDate}</span>
                 </div>
-               
             </div>
         </article>
     );
