@@ -125,3 +125,16 @@
   font-size: 13px;
   font-weight: 700;
 }
+.task-project {
+  width: fit-content;
+  margin-top: 16px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-soft);
+  font-size: 12px;
+  font-weight: 850;
+}

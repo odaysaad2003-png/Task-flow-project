@@ -89,6 +89,11 @@ export default function TasksPage() {
         closeCreateModal();
     }
 
+    function getProjectName(projectId) {
+        const project = projects.find((project) => project.id === projectId);
+
+        return project ? project.name : "Unknown Project";
+    }
 
     return (
         <div className="tasks-page">
@@ -121,7 +126,7 @@ export default function TasksPage() {
                 hasVisibleTasks ? (
                     <section className="tasks-grid">
                         {visibleTasks.map((task) => (
-                            <TaskCard key={task.id} task={task} />
+                            <TaskCard key={task.id} task={task} getProjectName={getProjectName} />
                         ))}
                     </section>
                 ) : (

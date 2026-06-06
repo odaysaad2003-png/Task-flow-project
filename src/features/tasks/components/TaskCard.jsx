@@ -1,4 +1,4 @@
-import {CalendarDays, CheckCircle2, Circle, Clock3, Flag} from "lucide-react";
+import {CalendarDays, CheckCircle2, Circle, Clock3, Flag, FolderKanban} from "lucide-react";
 import "../style/TaskCard.css";
 
 const statusConfig = {
@@ -28,7 +28,7 @@ const priorityConfig = {
     },
 };
 
-export default function TaskCard({task}) {
+export default function TaskCard({task, getProjectName}) {
     const status = statusConfig[task.status] || statusConfig.todo;
     const priority = priorityConfig[task.priority] || priorityConfig.low;
 
@@ -51,6 +51,10 @@ export default function TaskCard({task}) {
             <div className="task-card-body">
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
+                <div className="task-project">
+                    <FolderKanban size={15} />
+                    <span>{getProjectName(task.projectId)}</span>
+                </div>
             </div>
 
             <div className="task-card-footer">
@@ -58,6 +62,7 @@ export default function TaskCard({task}) {
                     <CalendarDays size={16} />
                     <span>Due {task.dueDate}</span>
                 </div>
+               
             </div>
         </article>
     );
