@@ -54,3 +54,34 @@
   color: #be123c;
   background: rgba(244, 63, 94, 0.13);
 }
+
+
+.board-task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.board-task-actions button {
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-soft);
+  font-size: 12px;
+  font-weight: 850;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.board-task-actions button:hover {
+  transform: translateY(-2px);
+  background: rgba(99, 102, 241, 0.18);
+  box-shadow: var(--shadow-sm);
+}

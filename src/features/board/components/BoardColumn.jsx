@@ -1,7 +1,7 @@
 import BoardTaskCard from "../components/BoardTaskCard";
 import "../style/BoardColumn.css";
 
-export default function BoardColumn({title, description, tasks}) {
+export default function BoardColumn({title, description, tasks, onTaskStatusChange}) {
     const hasTasks = tasks.length > 0;
 
     return (
@@ -17,7 +17,7 @@ export default function BoardColumn({title, description, tasks}) {
 
             <div className="board-column-list">
                 {hasTasks ? (
-                    tasks.map((task) => <BoardTaskCard key={task.id} task={task} />)
+                    tasks.map((task) => <BoardTaskCard key={task.id} task={task} onStatusChange={onTaskStatusChange} />)
                 ) : (
                     <div className="board-column-empty">No tasks in this column.</div>
                 )}

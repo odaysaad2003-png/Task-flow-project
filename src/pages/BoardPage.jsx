@@ -25,9 +25,26 @@ const boardColumns = [
 ];
 
 export default function BoardPage() {
-    const [tasks] = useLocalStorage("taskflow-tasks", mockTasks);
+    const [tasks , setTasks] = useLocalStorage("taskflow-tasks", mockTasks);
 
     const hasTasks = tasks.length > 0;
+
+
+    function handleUpdateTaskStatus(taskId, newStatus) {
+        const today = new Date().toISOString().split("T")[0];
+
+        setTasks((currentTasks) =>
+            currentTasks.map((task) =>
+                task.id === taskId
+                    ? {
+                          ...task,
+                          status: newStatus,
+                          updatedAt: today,
+                      }
+                    : task
+            )
+        );
+    }
 
     return (
         <div className="board-page">
@@ -48,6 +65,7 @@ export default function BoardPage() {
                                 title={column.title}
                                 description={column.description}
                                 tasks={columnTasks}
+                                onTaskStatusChange={handleUpdateTaskStatus}
                             />
                         );
                     })}
