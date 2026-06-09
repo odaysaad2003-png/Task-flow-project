@@ -113,6 +113,72 @@
   font-weight: 750;
 }
 
+
+
+.status-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.status-summary-card {
+  padding: 18px;
+  border-radius: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-summary-card span {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.status-summary-card h3 {
+  margin: 10px 0 4px;
+  color: var(--color-text);
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.status-summary-card p {
+  margin: 0 0 16px;
+  color: var(--color-text-soft);
+  font-size: 13px;
+}
+
+.status-progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.status-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.35s ease;
+}
+
+.status-summary-todo .status-progress-fill {
+  background: #64748b;
+}
+
+.status-summary-in-progress .status-progress-fill {
+  background: #8b5cf6;
+}
+
+.status-summary-completed .status-progress-fill {
+  background: #10b981;
+}
+
+@media (max-width: 900px) {
+  .status-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 700px) {
   .recent-task-item {
     flex-direction: column;

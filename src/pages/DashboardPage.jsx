@@ -26,6 +26,28 @@ export default function DashboardPage() {
 
 
     const recentTasks = [...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
+
+
+
+    const todoTasks = tasks.filter((task) => task.status === TASK_STATUS.TODO).length;
+
+    const statusSummary = [
+        {
+            label: "Todo",
+            value: todoTasks,
+            status: "todo",
+        },
+        {
+            label: "In Progress",
+            value: inProgressTasks,
+            status: "in-progress",
+        },
+        {
+            label: "Completed",
+            value: completedTasks,
+            status: "completed",
+        },
+    ];
     return (
         <div className="dashboard-page">
             <div className="dashboard-header">
@@ -74,6 +96,36 @@ export default function DashboardPage() {
                     delay={0.24}
                 />
             </section>
+
+            <section className="dashboard-section">
+                <div className="dashboard-section-header">
+                    <div>
+                        <h2>Task Status Summary</h2>
+                        <p>Understand how your work is distributed across the workflow.</p>
+                    </div>
+                </div>
+
+                <div className="status-summary-grid">
+                    {statusSummary.map((item) => {
+                        const percentage = totalTasks > 0 ? Math.round((item.value / totalTasks) * 100) : 0;
+
+                        return (
+                            <div className={`status-summary-card status-summary-${item.status}`} key={item.status}>
+                                <div>
+                                    <span>{item.label}</span>
+                                    <h3>{item.value}</h3>
+                                    <p>{percentage}% of total tasks</p>
+                                </div>
+
+                                <div className="status-progress">
+                                    <div className="status-progress-fill" style={{width: `${percentage}%`}} />
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </section>
+
             <section className="dashboard-section">
                 <div className="dashboard-section-header">
                     <div>
