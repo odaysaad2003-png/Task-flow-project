@@ -1,65 +1,64 @@
 .board-column {
-  min-height: 520px;
-  padding: 18px;
-  border-radius: 30px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.72)),
-    radial-gradient(circle at top right, var(--color-primary-soft), transparent 36%);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md);
+    min-height: 520px;
+    padding: 18px;
+    border-radius: 30px;
+    background: linear-gradient(180deg, var(--color-surface), var(--color-surface-soft)),
+        radial-gradient(circle at top right, var(--color-primary-soft), transparent 38%);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
 }
 
 .board-column-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 4px 4px 16px;
-  border-bottom: 1px solid var(--color-border-soft);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 4px 4px 16px;
+    border-bottom: 1px solid var(--color-border-soft);
 }
 
 .board-column-header h2 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 19px;
-  letter-spacing: -0.04em;
+    margin: 0;
+    color: var(--color-text);
+    font-size: 19px;
+    letter-spacing: -0.04em;
 }
 
 .board-column-header p {
-  margin: 7px 0 0;
-  color: var(--color-text-muted);
-  font-size: 13px;
-  line-height: 1.5;
+    margin: 7px 0 0;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 .board-column-header span {
-  min-width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: var(--color-primary-dark);
-  background: var(--color-primary-soft);
-  font-size: 13px;
-  font-weight: 900;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: var(--color-primary-dark);
+    background: var(--color-primary-soft);
+    font-size: 13px;
+    font-weight: 900;
 }
 
 .board-column-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 16px;
 }
 
 .board-column-empty {
-  min-height: 120px;
-  border-radius: 22px;
-  display: grid;
-  place-items: center;
-  padding: 18px;
-  color: var(--color-text-soft);
-  background: rgba(248, 250, 252, 0.65);
-  border: 1px dashed var(--color-border);
-  font-size: 14px;
-  font-weight: 700;
+    min-height: 120px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    color: var(--color-text-soft);
+    background: rgba(248, 250, 252, 0.65);
+    border: 1px dashed var(--color-border);
+    font-size: 14px;
+    font-weight: 700;
 }

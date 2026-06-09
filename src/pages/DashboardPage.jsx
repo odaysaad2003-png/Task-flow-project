@@ -53,7 +53,7 @@ export default function DashboardPage() {
             <div className="dashboard-header">
                 <PageHeader
                     eyebrow="Overview"
-                    title="Welcome back, Adi"
+                    title="Welcome Back, Oday"
                     description="Track your projects, tasks, priorities, and team workflow from one clean dashboard."
                     action={undefined}
                 />
@@ -100,8 +100,10 @@ export default function DashboardPage() {
             <section className="dashboard-section">
                 <div className="dashboard-section-header">
                     <div>
-                        <h2>Task Status Summary</h2>
-                        <p>Understand how your work is distributed across the workflow.</p>
+                        <h2 style={{color: "var(--color-primary)"}}>Task Status Summary</h2>
+                        <p style={{color: "var(--color-primary)"}}>
+                            Understand how your work is distributed across the workflow.
+                        </p>
                     </div>
                 </div>
 
@@ -129,8 +131,10 @@ export default function DashboardPage() {
             <section className="dashboard-section">
                 <div className="dashboard-section-header">
                     <div>
-                        <h2>Recent Tasks</h2>
-                        <p>Your latest created tasks across all projects.</p>
+                        <h2 style={{color: "var(--color-primary)"}}>Recent Tasks</h2>
+                        <p style={{color: "var(--color-primary)"}}>
+                            Your latest created tasks across all projects.
+                        </p>
                     </div>
                 </div>
 

@@ -1,7 +1,11 @@
-import {Bell, Search, Moon, Plus, Menu, X} from "lucide-react";
+import {Bell, Search, Plus} from "lucide-react";
+import {Sun, Moon} from "lucide-react";
+import {useTheme} from "../../../providers/ThemeProvider";
 import "./Topbar.css";
 
 export default function Topbar({onMenuClick, isSidebarOpen}) {
+    const {isDarkMode, toggleTheme} = useTheme();
+
     return (
         <header className="topbar">
             <div className="topbar-left">
@@ -27,8 +31,9 @@ export default function Topbar({onMenuClick, isSidebarOpen}) {
                     <span>New Task</span>
                 </button>
 
-                <button className="icon-btn">
-                    <Moon size={18} />
+                <button className="icon-btn" onClick={toggleTheme}>
+                   
+                    {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
 
                 <button className="icon-btn notification-btn">
