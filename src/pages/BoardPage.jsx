@@ -33,7 +33,7 @@ export default function BoardPage() {
         <div className="board-page">
             <PageHeader
                 eyebrow="Board"
-                title="Kanban workflow"
+                title="Kanban Workflow"
                 description="Visualize your tasks by status and understand where your work is moving."
             />
 

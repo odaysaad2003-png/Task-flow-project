@@ -18,7 +18,7 @@ export default function CreateTaskForm({
     initialValues = INITIAL_FORM_STATE,
     submitLabel = "Create Task",
 }) {
-    const [formData, setFormData] = useState(INITIAL_FORM_STATE);
+    const [formData, setFormData] = useState(initialValues);
     const [errors, setErrors] = useState({});
 
     function handleChange(event) {
