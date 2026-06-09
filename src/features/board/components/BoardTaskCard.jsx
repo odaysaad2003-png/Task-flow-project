@@ -31,6 +31,7 @@ const nextStatusActions = {
 export default function BoardTaskCard({task , onStatusChange}) {
 
 
+      // @ts-ignore
       const actions = nextStatusActions[task.status] || [];
 
     return (

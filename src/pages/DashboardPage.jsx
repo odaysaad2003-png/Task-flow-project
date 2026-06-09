@@ -13,26 +13,35 @@ export default function DashboardPage() {
 
 
     const [projects] = useLocalStorage("taskflow-projects", mockProjects);
+    const [tasks] = useLocalStorage("taskflow-tasks", mockTasks);
+
+
     const totalProjects = projects.length;
+    const totalTasks = tasks.length;
 
-    const totalTasks = mockTasks.length;
-    const completedTasks = mockTasks.filter((task) => task.status === TASK_STATUS.COMPLETED).length;
-    const highPriorityTasks = mockTasks.filter((task) => task.priority === TASK_PRIORITY.HIGH).length;
+    const completedTasks = tasks.filter((task) => task.status === TASK_STATUS.COMPLETED).length;
+    const inProgressTasks = tasks.filter((task) => task.status === TASK_STATUS.IN_PROGRESS).length;
+    const highPriorityTasks = tasks.filter((task) => task.priority === TASK_PRIORITY.HIGH).length;
+    const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
+
+    const recentTasks = [...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
     return (
         <div className="dashboard-page">
             <div className="dashboard-header">
                 <PageHeader
-            eyebrow="Overview"
-            title="Welcome back, Adi"
-            description="Track your projects, tasks, priorities, and team workflow from one clean dashboard." action={undefined}                />
+                    eyebrow="Overview"
+                    title="Welcome back, Adi"
+                    description="Track your projects, tasks, priorities, and team workflow from one clean dashboard."
+                    action={undefined}
+                />
             </div>
 
             <section className="stats-grid">
                 <StatsCard
                     title="Total Projects"
                     value={totalProjects}
-                    description="Active and archived projects"
+                    description="Projects saved in your workspace"
                     icon={FolderKanban}
                     accent="indigo"
                     delay={0}
@@ -41,16 +50,16 @@ export default function DashboardPage() {
                 <StatsCard
                     title="Total Tasks"
                     value={totalTasks}
-                    description="All tasks across projects"
+                    description="Tasks across all projects"
                     icon={ListTodo}
                     accent="violet"
                     delay={0.08}
                 />
 
                 <StatsCard
-                    title="Completed Tasks"
+                    title="Completed"
                     value={completedTasks}
-                    description="Tasks finished successfully"
+                    description={`${completionRate}% completion rate`}
                     icon={CheckCircle2}
                     accent="emerald"
                     delay={0.16}
@@ -59,11 +68,36 @@ export default function DashboardPage() {
                 <StatsCard
                     title="High Priority"
                     value={highPriorityTasks}
-                    description="Tasks that need attention"
+                    description={`${inProgressTasks} tasks in progress`}
                     icon={Flame}
                     accent="rose"
                     delay={0.24}
                 />
+            </section>
+            <section className="dashboard-section">
+                <div className="dashboard-section-header">
+                    <div>
+                        <h2>Recent Tasks</h2>
+                        <p>Your latest created tasks across all projects.</p>
+                    </div>
+                </div>
+
+                <div className="recent-tasks-list">
+                    {recentTasks.length > 0 ? (
+                        recentTasks.map((task) => (
+                            <div className="recent-task-item" key={task.id}>
+                                <div>
+                                    <h3>{task.title}</h3>
+                                    <p>{task.description}</p>
+                                </div>
+
+                                <span className={`recent-task-status status-${task.status}`}>{task.status}</span>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="dashboard-empty-box">No recent tasks yet.</div>
+                    )}
+                </div>
             </section>
         </div>
     );

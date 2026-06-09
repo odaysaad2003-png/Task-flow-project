@@ -12,6 +12,113 @@
   gap: 18px;
 }
 
+
+.dashboard-section {
+  padding: 24px;
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.76)),
+    radial-gradient(circle at top right, var(--color-primary-soft), transparent 36%);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.dashboard-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.dashboard-section-header h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 22px;
+  letter-spacing: -0.04em;
+}
+
+.dashboard-section-header p {
+  margin: 7px 0 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.recent-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recent-task-item {
+  padding: 16px;
+  border-radius: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.recent-task-item h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 15px;
+  letter-spacing: -0.03em;
+}
+
+.recent-task-item p {
+  margin: 7px 0 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recent-task-status {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: capitalize;
+}
+
+.status-todo {
+  color: #475569;
+  background: rgba(100, 116, 139, 0.12);
+}
+
+.status-in-progress {
+  color: #7c3aed;
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.status-completed {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.dashboard-empty-box {
+  min-height: 120px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-soft);
+  background: rgba(248, 250, 252, 0.68);
+  border: 1px dashed var(--color-border);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+@media (max-width: 700px) {
+  .recent-task-item {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 1200px) {
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
