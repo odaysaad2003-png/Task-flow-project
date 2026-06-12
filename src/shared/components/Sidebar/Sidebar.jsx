@@ -1,6 +1,6 @@
 import {NavLink} from "react-router-dom";
 import {LayoutDashboard, FolderKanban, Columns3, Settings, Sparkles, X, ListTodo} from "lucide-react";
-import "./Sidebar.css";
+import "./sidebar.css";
 
 const navItems = [
     {label: "Dashboard", path: "/dashboard", icon: LayoutDashboard},
