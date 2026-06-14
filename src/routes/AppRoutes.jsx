@@ -1,23 +1,29 @@
-// @ts-ignore
 import {Routes, Route, Navigate} from "react-router-dom";
-// @ts-ignore
 import {DashboardLayout} from "../layouts/DashboardLayout";
-// @ts-ignore
+
 import DashboardPage from "../pages/DashboardPage";
-// @ts-ignore   
 import ProjectsPage from "../pages/ProjectsPage";
-// @ts-ignore
 import BoardPage from "../pages/BoardPage";
-// @ts-ignore
 import SettingsPage from "../pages/SettingsPage";
 import TasksPage from "../pages/TasksPage";
+
+import ProtectedRoute from "./ProtectedRoute";
+
+import LoginPage from "../pages/LoginPage";
 
 export function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/login" element={<LoginPage />} />
 
-            <Route element={<DashboardLayout />}>
+            <Route
+                element={
+                    <ProtectedRoute>
+                        <DashboardLayout />
+                    </ProtectedRoute>
+                }
+            >
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/board" element={<BoardPage />} />
