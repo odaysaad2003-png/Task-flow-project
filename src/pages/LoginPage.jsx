@@ -1,12 +1,13 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {auth} from "../features/auth/auth";
+import {useAuth} from "../context/AuthContext";
 import "./style/login.css"; 
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -18,7 +19,7 @@ export default function LoginPage() {
             email: email,
         };
 
-        auth.login(user);
+        login(user);
 
         navigate("/dashboard");
     };
